@@ -34,8 +34,9 @@ class App(customtkinter.CTk):
 
     def btn_mostrar_on_click(self):
         pass
-        
-    
+        Nombre_texto= prompt(title="Ingrese nombre", prompt="Ingrese")
+        self.txt_nombre.delete(0,10000)
+        self.txt_nombre.insert(0,Nombre_texto)  
 if __name__ == "__main__":
     app = App()
     app.geometry("300x300")

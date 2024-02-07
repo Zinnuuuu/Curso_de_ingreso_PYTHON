@@ -40,7 +40,8 @@ class App(customtkinter.CTk):
 
     def btn_sumar_on_click(self):
         pass
-     
+        numero_texto= self.txt_operador_a.get()
+        numero_
         
 if __name__ == "__main__":
     app = App()

@@ -5,8 +5,8 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-nombre:
-apellido:
+nombre:Bruno 
+apellido:Condarco
 ---
 Ejercicio: entrada_salida_01
 ---
@@ -27,7 +27,8 @@ class App(customtkinter.CTk):
 
     def btn_mostrar_on_click(self):
         pass
-
+        #tittle  para ponerle nombre a la ventana y message para poner algo literal
+        alert(title="Alert", message="Esto no anda, funciona")
 
 if __name__ == "__main__":
     app = App()
