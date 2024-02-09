@@ -3,10 +3,10 @@ from tkinter.messagebox import showinfo as alert
 from tkinter.messagebox import askyesno as question
 from tkinter.simpledialog import askstring as prompt
 import customtkinter
-
+import math
 '''
-nombre:
-apellido:
+nombre:Bruno
+apellido:Condarco
 ---
 TP: ES_Facturaciones
 ---
@@ -41,7 +41,7 @@ class App(customtkinter.CTk):
         
         self.txt_importe_3 = customtkinter.CTkEntry(master=self)
         self.txt_importe_3.grid(row=2, column=1)
-       
+        
         self.btn_total = customtkinter.CTkButton(master=self, text="TOTAL", command=self.btn_total_on_click)
         self.btn_total.grid(row=3, pady=10, columnspan=2, sticky="nsew")
         
@@ -53,13 +53,29 @@ class App(customtkinter.CTk):
 
     def btn_total_on_click(self):
         pass
-
+        numeroa= float(self.txt_importe_1.get())
+        numerob= float(self.txt_importe_2.get())
+        numeroc= float(self.txt_importe_3.get())
+        resultado= numeroa + numerob + numeroc
+        alert("", message=f"la suma de estos es de {resultado}")
     def btn_promedio_on_click(self):
         pass
-
+        numeroa= float(self.txt_importe_1.get())
+        numerob= float(self.txt_importe_2.get())
+        numeroc= float(self.txt_importe_3.get())
+        suma = numeroa + numerob + numeroc 
+        promedio= suma / 3
+        alert("", message=f"El promedio de estos es de {promedio}")
     def btn_total_iva_on_click(self):
-        pass      
-    
+        pass
+        numeroa= float(self.txt_importe_1.get())
+        numerob= float(self.txt_importe_2.get())
+        numeroc= float(self.txt_importe_3.get())
+        resultado_suma= numeroa + numerob + numeroc
+        incremento= 21 * resultado_suma /100
+        resultado_actualizado= resultado_suma + incremento
+        alert("", message=f"El precio mas IVA de estos es de {resultado_actualizado}")
+
 if __name__ == "__main__":
     app = App()
     app.geometry("300x300")
