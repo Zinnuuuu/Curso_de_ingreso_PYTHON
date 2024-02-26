@@ -26,7 +26,17 @@ class App(customtkinter.CTk):
 
 
     def btn_mostrar_on_click(self):
-        pass
+        # bandera = True
+        numero = int(prompt("UTN" , "Ingrese un numero"))
+        
+        for i in range (2 ,numero): #se empieza en 2 porq todos son div por 1
+            if numero % 1 == 0:
+                bandera = True
+                break
+        
+        if bandera == False:
+            print("")
+                
         
     
 if __name__ == "__main__":

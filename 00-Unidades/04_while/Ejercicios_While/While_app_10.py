@@ -37,8 +37,22 @@ class App(customtkinter.CTk):
 
 
     def btn_comenzar_ingreso_on_click(self):
-        pass
+        # cantidad = 0
+        contador_n = 0
+        # contador_p = 0
+        # suma_acumulada_p = 0
+        # suma_acumulada_n = 0
+        while True:
+            numero = prompt("Ingrese su numero")
+            if numero == None:
+                break
+            numero = int(numero)
+            if numero < 0:
+                contador_n = contador_n + 1
+        
+        alert("UTN",f"La cantidad de numeros negativos son de {contador_n}")
 
+        
     
 if __name__ == "__main__":
     app = App()

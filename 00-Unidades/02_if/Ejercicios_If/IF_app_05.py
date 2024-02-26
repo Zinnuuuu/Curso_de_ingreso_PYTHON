@@ -5,9 +5,9 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-nombre:
-apellido:
----
+nombre:Bruno
+apellido:Condarco
+
 Ejercicio: if_05
 ---
 Enunciado:
@@ -33,7 +33,9 @@ class App(customtkinter.CTk):
 
 
     def btn_mostrar_on_click(self):
-        pass
+        edad= int(self.txt_edad.get())
+        if (edad >=0  and edad <= 17):
+            alert("", "No es adolescente")
 
         
         
@@ -42,3 +44,22 @@ if __name__ == "__main__":
     app = App()
     app.geometry("300x300")
     app.mainloop()
+    '''
+    OR= es como un puente donde solo basta q uno sea verdadero
+    And= Necesita q ambos sean verdaderos
+
+
+    Tabla de verdad de OR
+
+    V    V     V
+    V    F     V
+    F    V     V
+    F    F     F
+    
+    Tabla de verdad de AND
+    V    V     V
+    F    V     F
+    V    F     F
+    F    F     F
+    
+    '''

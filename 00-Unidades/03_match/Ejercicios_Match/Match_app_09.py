@@ -3,7 +3,7 @@ from tkinter.messagebox import showinfo as alert
 from tkinter.messagebox import askyesno as question
 from tkinter.simpledialog import askstring as prompt
 import customtkinter
-
+import math
 
 '''
 nombre:
@@ -57,7 +57,50 @@ class App(customtkinter.CTk):
         
     
     def btn_informar_on_click(self):
-        pass
+        destinos = self.combobox_destino.get()
+        estaciones = self.combobox_estaciones.get()
+        precio_base = 15000
+        aumento = 0
+        descuento = 0
+        match destinos:
+            #agarra la caja de texto que elegiste en match
+            case "Bariloche":
+                if estaciones == "Invierno":
+                    aumento = 20
+                elif estaciones == "Verano":
+                    descuento = 20
+                else:
+                    aumento = 10
+                
+            case "Cataratas" | "Cordoba":
+                if estaciones == "Invierno":
+                    descuento = 20
+                elif estaciones == "Verano":
+                    aumento = 10
+                else: 
+                    if estaciones == "Primavera" or "Otoño" and destinos == "Cataratas":
+                        aumento = 10
+                    else: 
+                        if destinos == "Cordoba":
+                            aumento = 0 
+            
+            case "Mar del plata":
+                if estaciones == "Invierno":
+                    descuento = 20
+                elif estaciones == "Verano":
+                    aumento = 20
+                else:
+                    aumento = 10
+                    
+        if descuento:   
+            operacion_d = (descuento / 100) * 15000
+            precio_final = precio_base - operacion_d
+        else:
+            operacion_a = (aumento / 100) * 15000
+            precio_final = operacion_a + precio_base
+        
+        alert("Tp 9",precio_final)
+        
             
     
 if __name__ == "__main__":

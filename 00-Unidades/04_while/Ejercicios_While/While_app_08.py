@@ -35,8 +35,29 @@ class App(customtkinter.CTk):
         self.btn_mostrar.grid(row=2, padx=20, pady=20, columnspan=2, sticky="nsew")
 
 
+
     def btn_comenzar_ingreso_on_click(self):
-        pass
+        contador= 1
+        acumulador_p = 0
+        acumulador_n = 0
+        multiplicador_n = 1
+        bandera = True
+
+        while bandera:
+            numero = int(prompt("Numero","Ingrese los numero que desee"))
+
+            if numero == None or numero == 0:
+                break
+            bandera = False
+            contador += 1
+            acumulador_p += numero
+            multiplicador_n -= numero
+            acumulador_n -= multiplicador_n
+
+            self.txt_suma_acumulada.delete(0,"end")
+            self.txt_suma_acumulada.insert(0,acumulador_p)
+            self.txt_producto.delete(0,"end")
+            self.txt_producto.delete(0,acumulador_n)
 
     
 if __name__ == "__main__":

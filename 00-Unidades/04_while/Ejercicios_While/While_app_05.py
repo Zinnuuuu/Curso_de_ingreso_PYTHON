@@ -25,13 +25,26 @@ class App(customtkinter.CTk):
 
         self.title("UTN FRA")
         
-        self.btn_validar_letra = customtkinter.CTkButton(master=self, text="Ingresar", command=self.btn_validar_letra_on_click)
+        self.btn_validar_letra = customtkinter.CTkButton(master=self, text="Validar letra", command=self.btn_validar_letra_on_click)
         self.btn_validar_letra.grid(row=2, pady=20, columnspan=2, sticky="nsew")
         
     
     def btn_validar_letra_on_click(self):
-        pass
+        letra = prompt("Letra", "Ingrese una lerta")
+        bandera = True
+
+        while bandera:
+            if letra == "U" or letra == "T" or letra == "N" :
+                print ("Letra correcta")
+                bandera = False
+            elif letra == None:
+                break
             
+            else:
+                letra = prompt("Error", "Reingrese letra")
+
+
+        
     
 if __name__ == "__main__":
     app = App()

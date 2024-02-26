@@ -38,7 +38,12 @@ class App(customtkinter.CTk):
         
     
     def btn_informar_on_click(self):
-        pass
+        mes = self.combobox_mes.get()
+        match mes:
+            case "Febrero":
+                alert("","Este mes no tiene mas de 29 dias")
+            case _:
+                alert("", "Este mes tiene 30 dias o mas")
     
     
 if __name__ == "__main__":
