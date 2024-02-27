@@ -41,8 +41,8 @@ class App(customtkinter.CTk):
 
     def btn_comenzar_ingreso_on_click(self):
         banderita = True
-        # numero_max = 0
-        # numero_min = 0
+        numero_max = 0
+        numero_min = 0
 
         while True:
             numero = prompt("","Ingrese un numero")
