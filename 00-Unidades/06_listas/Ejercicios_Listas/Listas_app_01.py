@@ -3,7 +3,7 @@ from tkinter.messagebox import showinfo as alert
 from tkinter.messagebox import askyesno as question
 from tkinter.simpledialog import askstring as prompt
 import customtkinter
-
+import math
 
 '''
 Simulacro Turno Tarde
@@ -52,99 +52,91 @@ class App(customtkinter.CTk):
 
     def btn_mostrar_on_click(self):
         seguir = True
-        personasdia1 = 0
-        personasdia3 = 0
-        personasdia5 = 0
-        totalpersonas = 0
 
-        total_kilos = 0
+        nivel1cantidad = 0
+        nivel2cantidad = 0
+        nivel3cantidad = 0
+        totaljugadores = 0
+        
+        nivel_masalcanzado = 0
 
-        banderaaltura = False
-        altura_max = 0
-        edad_max = 0
-        nombre_max = 0
+        principiantes = 0
+        porcentaje_principiante = 0
 
-        dia_concurrido = 0
+        intermedios = 0
+        promedio_intermedios_score = 0
+        total_score_intermedios = 0
 
-        banderadia5 = False
-        nombre_joven = 0
-        kilos_joven = 0
-        edad_joven = 0
+        banderamayor = False
+        edad_mayor = 0
+        categoria_mayor = ""
 
+        scorebandera = False
+        score_max = 0
+        nombre_maxscore = ""
+
+        vueltas = 1
 
         
+        for ingresos in range (vueltas):
+            while seguir:
+                nombre = input("Ingrese su nombre :")
+
+                categoria = input ("Ingrese su categoria:")
+                while categoria != "Principiante" and categoria != "Intermedio" and categoria != "Avanzado":
+                    categoria = input ("Reingrese categoria:")
+
+                edad = int(input("Ingrese una edad (entre 18 y 99) :"))
+                while edad < 18 or edad > 99 :
+                        edad = int(input("Reingrese una edad válida: "))
+
+                score = int(input("Ingrese un puntaje: "))
+                while score < 1:
+                        score = int(input("Reingrese un puntaje válido: "))
+
+                nivel_alcanzado = int (input("Ingrese nivel"))
+                while nivel_alcanzado  != 1 and nivel_alcanzado != 2 and nivel_alcanzado != 3:
+                        nivel_alcanzado = int (input  ("Reingrese nivel"))
         
-        while seguir == True:
-            nombre = prompt("","Ingrese su nombre")
-
-            edad = int(prompt("","Ingrese una edad"))
-            while edad < 13:
+                if nivel_alcanzado == 1:
+                    nivel1cantidad += 1
+                elif nivel_alcanzado == 2:
+                    nivel2cantidad += 1
+                else:
+                    nivel3cantidad += 1
                 
-                edad = int(prompt("", "Ingrese una edad"))
+                if categoria == "Principiante" :
+                    principiantes += 1
+                elif categoria == "Intermedio":
+                    intermedios += 1
+                    total_score_intermedios += score
 
-            altura = float(prompt("","Ingrese su altura (en cm)"))
-            while altura < 0:
-                
-                altura = float(prompt("", "Reingrese su altura (en cm)"))
-
-            dias = int(prompt("","Ingrese los dias que vendra"))
-            while dias != 1 and dias != 3 and dias != 5:
-                
-                dias = int(prompt("", "Reingrese los dias que vendra"))
-
-            peso_muerto = float(prompt("","Ingrese cuanto levanta en peso muerto"))
-            while peso_muerto < 1:
-                
-                peso_muerto = float(prompt("", "Reingrese cuanto levanta en peso muerto"))
-        
-        
-        if dias == 1:
-            personasdia1 += 1
-        elif dias == 3:                                                                   # El promedio de kilos que levantan las personas que asisten solo 3 días a la semana.
-            personasdia3 += 1
-            promedio_kilo = total_kilos + peso_muerto / personasdia3
-        else:
-            personasdia5 += 1
+                if edad > edad_mayor or banderamayor == False:
+                    edad_mayor = edad
+                    categoria_mayor = categoria
+                    banderamayor = True
             
+                if categoria == "Principiante" and (score > score_max or scorebandera == False):
+                    score_max = score
+                    nombre_maxscore = nombre   
+                    scorebandera = True
 
-
-        if banderadia5 == False:                                       #Nombre y cantidad de kilos levantados en peso muerto, de la persona más joven que solo asista 5 días a la semana.
-            edad_joven = edad
-            nombre_joven = nombre
-            kilos_joven = peso_muerto
-            banderadia5 = True
-        elif edad < edad_joven:
-            edad_joven = edad
-            nombre_joven = nombre
-            kilos_joven = peso_muerto
-            banderadia5 = True
-
-
-        if altura > altura_max and banderaaltura == False:                                   #Nombre y edad del cliente con más altura.
-            altura_max = altura
-            nombre_max = nombre
-            edad_max = edad
-            banderaaltura =  True
-
-            seguir = question("","Desea continuar?")
+            seguir = question("", "¿Desea añadir otro participante?")
         
-        if personasdia5 > personasdia3 and personasdia5 > personasdia1:                          #Determinar si los clientes eligen más ir 1, 3 o 5 días
-            dia_concurrido = 5
-        elif personasdia3 > personasdia1:
-            dia_concurrido = 3
-        else:
-            dia_concurrido = 1
+        totaljugadores = nivel1cantidad + nivel2cantidad + nivel3cantidad
+        if totaljugadores > 0:
+            porcentaje_principiante = round(principiantes / totaljugadores * 100)
 
-        
+        if intermedios > 0:
+            promedio_intermedios_score = total_score_intermedios / intermedios
 
-        totalpersonas = personasdia1 + personasdia3 + personasdia5                         #El porcentaje de clientes que asiste solo 1 día a la semana.
-        porcentaje_pers_dia1 = (totalpersonas / personasdia1 )* 100
+        nivel_masalcanzado = max(nivel1cantidad, nivel2cantidad, nivel3cantidad)
 
-        print(f" El promedio de kilos que levantan las personas que asisten solo 3 días a la semana es de {promedio_kilo}") 
-        print(f"El porcentaje de clientes que asiste 1 vez a la semana es de {porcentaje_pers_dia1}")
-        print(f"El cliente mas alto es {nombre_max} y tiene {edad_max} años")
-        print(f"El dia mas concurrido fue el dia {dia_concurrido}")
-        print(f"El Nombre y kilos que levanta de la persona más joven que solo asista 5 días a la semana es {nombre_joven} y levanta {kilos_joven}")
+        print(f"El nivel más alcanzado por los jugadores es el {nivel_masalcanzado}")
+        print(f"El porcentaje de jugadores de la categoría principiante sobre el total es del {porcentaje_principiante}%")
+        print(f"La categoría del participante de mayor edad es {categoria_mayor}")
+        print(f"{nombre_maxscore} tiene el puntaje más alto con {score_max}")
+        print(f"El promedio de puntaje de los participantes intermedios es de {promedio_intermedios_score}.")
 
     
 if __name__ == "__main__":
